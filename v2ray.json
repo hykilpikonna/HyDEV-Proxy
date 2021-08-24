@@ -1,0 +1,117 @@
+{
+    "log":
+    {
+        "access": "/var/log/v2ray/access.log",
+        "error": "/var/log/v2ray/error.log",
+        "loglevel": "warning"
+    },
+    "inbounds":
+    [
+        {
+            "port": 8080,
+            "protocol": "vmess",
+            "settings":
+            {
+                "clients":
+                [
+                    {
+                        "id": "024eb2e3-65e8-4b30-bb24-f1ff6501fc8e",
+                        "level": 1,
+                        "alterId": 0
+                    }
+                ]
+            },
+            "streamSettings":
+            {
+                "network": "tcp"
+            },
+            "sniffing": {
+                "enabled": true,
+                "destOverride":
+                [
+                    "http",
+                    "tls"
+                ]
+            }
+        }
+    ],
+    "outbounds":
+    [
+        {
+            "protocol": "freedom",
+            "settings":
+            {
+                "domainStrategy": "UseIP"
+            },
+            "tag": "direct"
+        },
+        {
+            "protocol": "blackhole",
+            "settings": {},
+            "tag": "blocked"
+        },
+        {
+            "protocol": "mtproto",
+            "settings": {},
+            "tag": "tg-out"
+        }
+    ],
+    "dns":
+    {
+        "servers":
+        [
+            "https+local://cloudflare-dns.com/dns-query",
+            "1.1.1.1",
+            "1.0.0.1",
+            "8.8.8.8",
+            "8.8.4.4",
+            "localhost"
+        ]
+    },
+    "routing":
+    {
+        "domainStrategy": "IPOnDemand",
+        "rules":
+        [
+            {
+                "type": "field",
+                "ip":
+                [
+                    "0.0.0.0/8",
+                    "10.0.0.0/8",
+                    "100.64.0.0/10",
+                    "127.0.0.0/8",
+                    "169.254.0.0/16",
+                    "172.16.0.0/12",
+                    "192.0.0.0/24",
+                    "192.0.2.0/24",
+                    "192.168.0.0/16",
+                    "198.18.0.0/15",
+                    "198.51.100.0/24",
+                    "203.0.113.0/24",
+                    "::1/128",
+                    "fc00::/7",
+                    "fe80::/10"
+                ],
+                "outboundTag": "blocked"
+            },
+            {
+                "type": "field",
+                "inboundTag":
+                [
+                    "tg-in"
+                ],
+                "outboundTag": "tg-out"
+            }
+        ]
+    },
+    "transport":
+    {
+        "kcpSettings":
+        {
+            "uplinkCapacity": 100,
+            "downlinkCapacity": 100,
+            "congestion": true
+        }
+    }
+}
