@@ -14,3 +14,8 @@ external-controller: 127.0.0.1:9090
 allow-lan: false
 mode: rule
 log-level: warning
+
+proxies:
+  - {"name":"🇨🇦 HyDEV Toronto Linode","type":"vmess","server":"nix.hydev.org","port":8080,"uuid":"024eb2e3-65e8-4b30-bb24-f1ff6501fc8e","alterId":0,"cipher":"aes-128-gcm","udp":true}
+  - {"name":"🇯🇵 HyDEV Tokyo Linode","type":"vmess","server":"139.162.78.21","port":8080,"uuid":"024eb2e3-65e8-4b30-bb24-f1ff6501fc8e","alterId":0,"cipher":"aes-128-gcm","udp":true}
+  - {"name":"🇨🇳 HyDEV 杭州 阿里云","type":"ss","server":"cn.hydev.org","port":14783,"password":"8c80d838-253c-41df-afda-d0f04a2c0873","alterId":0,"cipher":"chacha20-ietf-poly1305","udp":false}
