@@ -62,6 +62,11 @@ proxy-groups:
     - '🇯🇵 HyDEV Tokyo Linode'
     - REJECT
 -
+  name: ==========================================================
+  type: select
+  proxies:
+    - REJECT
+-
   name: 站点-国际视频🌎
   type: select
   proxies:
@@ -75,6 +80,18 @@ proxy-groups:
     - DIRECT
     - 服务器-中国🇨🇳
     - 服务器-世界🌎
+-
+  name: 站点-其他🌎
+  type: select
+  proxies:
+    - DIRECT
+    - 服务器-中国🇨🇳
+    - 服务器-世界🌎
+-
+  name: ============================================================
+  type: select
+  proxies:
+    - REJECT
 -
   name: 站点-中国视频🇨🇳
   type: select
@@ -97,6 +114,11 @@ proxy-groups:
     - 服务器-中国🇨🇳
     - 服务器-世界🌎
 -
+  name: =============================================================
+  type: select
+  proxies:
+    - REJECT
+-
   name: 流量-BT
   type: select
   proxies:
@@ -105,13 +127,6 @@ proxy-groups:
     - 服务器-世界🌎
 -
   name: 流量-LAN
-  type: select
-  proxies:
-    - DIRECT
-    - 服务器-中国🇨🇳
-    - 服务器-世界🌎
--
-  name: 流量-其他
   type: select
   proxies:
     - DIRECT
@@ -841,4 +856,4 @@ rules:
 - IP-CIDR,100.64.0.0/10,流量-LAN
 
 # 其他流量
-- MATCH,流量-其他
+- MATCH,站点-其他🌎
