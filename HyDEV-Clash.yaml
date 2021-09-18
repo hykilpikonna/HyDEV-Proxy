@@ -26,6 +26,15 @@ proxies:
     cipher: aes-128-gcm
     udp: true
 
+  - name: "🇨🇦 UofTCTF Quebec"
+    type: vmess
+    server: uoftctf.hydev.org
+    port: 8080
+    uuid: 024eb2e3-65e8-4b30-bb24-f1ff6501fc8e
+    alterId: 0
+    cipher: aes-128-gcm
+    udp: true
+
   - name: "🇯🇵 HyDEV Tokyo Linode"
     type: vmess
     server: 139.162.78.21
@@ -59,6 +68,7 @@ proxy-groups:
   proxies:
     - DIRECT
     - '🇨🇦 HyDEV Toronto Linode'
+    - '🇨🇦 UofTCTF Quebec'
     - '🇯🇵 HyDEV Tokyo Linode'
     - REJECT
 -
