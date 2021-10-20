@@ -17,13 +17,13 @@ log-level: warning
 
 proxies:
 
-  - name: "🇨🇦 HyDEV Toronto Linode"
-    type: vmess
-    server: nix.hydev.org
-    port: 8080
-    uuid: 024eb2e3-65e8-4b30-bb24-f1ff6501fc8e
+  - name: "🇨🇦 HyDEV Canada OVH"
+    type: ss
+    server: ovh.hydev.org
+    port: 14783
+    password: 8c80d838-253c-41df-afda-d0f04a2c0873
     alterId: 0
-    cipher: aes-128-gcm
+    cipher: chacha20-ietf-poly1305
     udp: true
 
   - name: "🇨🇦 UofTCTF Quebec"
