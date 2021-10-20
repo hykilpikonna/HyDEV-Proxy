@@ -67,7 +67,7 @@ proxy-groups:
   type: select
   proxies:
     - DIRECT
-    - '🇨🇦 HyDEV Toronto Linode'
+    - '🇨🇦 HyDEV Canada OVH'
     - '🇨🇦 UofTCTF Quebec'
     - '🇯🇵 HyDEV Tokyo Linode'
     - REJECT
