@@ -61,15 +61,19 @@ proxy-groups:
   proxies:
     - DIRECT
     - '🇨🇳 HyDEV 杭州 阿里云'
+    - '🇨🇦 HyDEV Canada OVH'
+    - '🇨🇦 UofTCTF Quebec'
+    - '🇯🇵 HyDEV Tokyo Vultr'
     - REJECT
 -
   name: 服务器-世界🌎
   type: select
   proxies:
     - DIRECT
+    - '🇨🇳 HyDEV 杭州 阿里云'
     - '🇨🇦 HyDEV Canada OVH'
     - '🇨🇦 UofTCTF Quebec'
-    - '🇯🇵 HyDEV Tokyo Linode'
+    - '🇯🇵 HyDEV Tokyo Vultr'
     - REJECT
 -
   name: ==========================================================
