@@ -44,6 +44,15 @@ proxies:
     cipher: aes-128-gcm
     udp: true
 
+  - name: "🇯🇵 HyDEV Tokyo Vultr SS"
+    type: ss
+    server: nix.hydev.org
+    port: 14783
+    password: 8c80d838-253c-41df-afda-d0f04a2c0873
+    alterId: 0
+    cipher: chacha20-ietf-poly1305
+    udp: true
+
   - name: "🇨🇳 HyDEV 杭州 阿里云"
     type: ss
     server: cn.hydev.org
@@ -64,6 +73,7 @@ proxy-groups:
     - '🇨🇦 HyDEV Canada OVH'
     - '🇨🇦 UofTCTF Quebec'
     - '🇯🇵 HyDEV Tokyo Vultr'
+    - '🇯🇵 HyDEV Tokyo Vultr SS'
     - REJECT
 -
   name: 服务器-世界🌎
@@ -74,6 +84,7 @@ proxy-groups:
     - '🇨🇦 HyDEV Canada OVH'
     - '🇨🇦 UofTCTF Quebec'
     - '🇯🇵 HyDEV Tokyo Vultr'
+    - '🇯🇵 HyDEV Tokyo Vultr SS'
     - REJECT
 -
   name: ==========================================================
