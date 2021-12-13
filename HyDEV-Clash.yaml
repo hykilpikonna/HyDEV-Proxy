@@ -53,9 +53,9 @@ proxies:
     cipher: chacha20-ietf-poly1305
     udp: true
 
-  - name: "🇺🇸 HyDEV New York Vultr"
+  - name: "🇱🇺 HyDEV Luxembourg"
     type: ss
-    server: us.hydev.org
+    server: 92.38.163.122
     port: 14783
     password: 8c80d838-253c-41df-afda-d0f04a2c0873
     alterId: 0
@@ -83,7 +83,7 @@ proxy-groups:
     - '🇨🇦 UofTCTF Quebec'
     - '🇯🇵 HyDEV Tokyo Vultr'
     - '🇯🇵 HyDEV Tokyo Vultr SS'
-    - '🇺🇸 HyDEV New York Vultr'
+    - '🇱🇺 HyDEV Luxembourg'
     - REJECT
 -
   name: 服务器-世界🌎
@@ -95,7 +95,7 @@ proxy-groups:
     - '🇨🇦 UofTCTF Quebec'
     - '🇯🇵 HyDEV Tokyo Vultr'
     - '🇯🇵 HyDEV Tokyo Vultr SS'
-    - '🇺🇸 HyDEV New York Vultr'
+    - '🇱🇺 HyDEV Luxembourg'
     - REJECT
 -
   name: ==========================================================
