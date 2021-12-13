@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
 
-import yaml
+import ruamel.yaml
 
 if __name__ == '__main__':
+    yaml = ruamel.yaml.YAML()
+
     with open('clash-source.yml', 'r', encoding='utf-8') as f:
-        txt = f.read()
-        yml = yaml.safe_load(txt)
+        yml = yaml.load(f)
 
     proxies = ['DIRECT'] + [p['name'] for p in yml['proxies']] + ['REJECT']
     for group in yml['proxy-groups']:
@@ -14,4 +15,4 @@ if __name__ == '__main__':
         group['proxies'] = proxies
 
     with open('../clash.yml', 'w', encoding='utf-8') as f:
-        f.write(yaml.safe_dump(yml, allow_unicode=True))
+        yaml.dump(yml, f)

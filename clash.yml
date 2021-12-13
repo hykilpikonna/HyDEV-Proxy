@@ -1,107 +1,138 @@
-allow-lan: false
-external-controller: 127.0.0.1:9090
-log-level: warning
+#---------------------------------------------------#
+## 配置文件需要放置在 $HOME/.config/clash/*.yaml
+
+## 这份文件是clashX的基础配置文件，请尽量新建配置文件进行修改。
+## ！！！只有这份文件的端口设置会随ClashX启动生效
+
+## 如果您不知道如何操作，请参阅 官方Github文档 https://github.com/Dreamacro/clash/blob/dev/README.md
+#---------------------------------------------------#
+
+# (HTTP and SOCKS5 in one port)
 mixed-port: 7890
+# RESTful API for clash
+external-controller: 127.0.0.1:9090
+allow-lan: false
 mode: rule
+log-level: warning
+
 proxies:
-- alterId: 0
-  cipher: chacha20-ietf-poly1305
-  name: 🇨🇦 HyDEV Canada OVH
-  password: 8c80d838-253c-41df-afda-d0f04a2c0873
-  port: 14783
+
+- name: 🇨🇦 Canada OVH
+  type: ss
   server: ovh.hydev.org
-  type: ss
+  port: 14783
+  password: 8c80d838-253c-41df-afda-d0f04a2c0873
+  alterId: 0
+  cipher: chacha20-ietf-poly1305
   udp: true
-- alterId: 0
-  cipher: aes-128-gcm
-  name: 🇨🇦 UofTCTF Quebec
-  port: 8080
+
+- name: 🇨🇦 UofTCTF Quebec
+  type: vmess
   server: uoftctf.hydev.org
-  type: vmess
-  udp: true
-  uuid: 024eb2e3-65e8-4b30-bb24-f1ff6501fc8e
-- alterId: 0
-  cipher: aes-128-gcm
-  name: 🇯🇵 HyDEV Tokyo Vultr
   port: 8080
-  server: nix.hydev.org
-  type: vmess
-  udp: true
   uuid: 024eb2e3-65e8-4b30-bb24-f1ff6501fc8e
-- alterId: 0
-  cipher: chacha20-ietf-poly1305
-  name: 🇯🇵 HyDEV Tokyo Vultr SS
-  password: 8c80d838-253c-41df-afda-d0f04a2c0873
-  port: 14783
+  alterId: 0
+  cipher: aes-128-gcm
+  udp: true
+
+- name: 🇯🇵 HyDEV Tokyo Vultr
+  type: vmess
   server: nix.hydev.org
-  type: ss
+  port: 8080
+  uuid: 024eb2e3-65e8-4b30-bb24-f1ff6501fc8e
+  alterId: 0
+  cipher: aes-128-gcm
   udp: true
-- alterId: 0
-  cipher: chacha20-ietf-poly1305
-  name: 🇱🇺 HyDEV Luxembourg
-  password: 8c80d838-253c-41df-afda-d0f04a2c0873
+
+- name: 🇯🇵 HyDEV Tokyo Vultr SS
+  type: ss
+  server: nix.hydev.org
   port: 14783
+  password: 8c80d838-253c-41df-afda-d0f04a2c0873
+  alterId: 0
+  cipher: chacha20-ietf-poly1305
+  udp: true
+
+- name: 🇱🇺 HyDEV Luxembourg
+  type: ss
   server: 92.38.163.122
-  type: ss
-  udp: true
-- alterId: 0
-  cipher: chacha20-ietf-poly1305
-  name: 🇨🇳 HyDEV 杭州 阿里云
-  password: 8c80d838-253c-41df-afda-d0f04a2c0873
   port: 14783
-  server: cn.hydev.org
+  password: 8c80d838-253c-41df-afda-d0f04a2c0873
+  alterId: 0
+  cipher: chacha20-ietf-poly1305
+  udp: true
+
+- name: 🇨🇳 HyDEV 杭州 阿里云
   type: ss
+  server: cn.hydev.org
+  port: 14783
+  password: 8c80d838-253c-41df-afda-d0f04a2c0873
+  alterId: 0
+  cipher: chacha20-ietf-poly1305
   udp: false
+
 proxy-groups:
 - name: 🌎国际视频
+  type: select
   proxies: &id001
   - DIRECT
-  - 🇨🇦 HyDEV Canada OVH
+  - 🇨🇦 Canada OVH
   - 🇨🇦 UofTCTF Quebec
   - 🇯🇵 HyDEV Tokyo Vultr
   - 🇯🇵 HyDEV Tokyo Vultr SS
   - 🇱🇺 HyDEV Luxembourg
   - 🇨🇳 HyDEV 杭州 阿里云
   - REJECT
-  type: select
 - name: 🌎GFW黑名单
-  proxies: *id001
   type: select
+  proxies: *id001
 - name: 🇨🇳中国视频
-  proxies: *id001
   type: select
+  proxies: *id001
 - name: 🇨🇳中国其他
-  proxies: *id001
   type: select
+  proxies: *id001
 - name: 🇨🇳中国GEOIP
-  proxies: *id001
   type: select
+  proxies: *id001
 - name: 🌐LAN
-  proxies: *id001
   type: select
+  proxies: *id001
 - name: 🌐BT元信息
-  proxies: *id001
   type: select
+  proxies: *id001
 - name: 🌐所有其他
-  proxies: *id001
+
   type: select
+  proxies: *id001
 rules:
+
+  # (🌎国际视频)
+  # > ABC
 - DOMAIN-SUFFIX,edgedatg.com,🌎国际视频
 - DOMAIN-SUFFIX,go.com,🌎国际视频
+
+  # > AbemaTV
 - DOMAIN,linear-abematv.akamaized.net,🌎国际视频
 - DOMAIN-SUFFIX,abema.io,🌎国际视频
 - DOMAIN-SUFFIX,abema.tv,🌎国际视频
 - DOMAIN-SUFFIX,akamaized.net,🌎国际视频
 - DOMAIN-SUFFIX,ameba.jp,🌎国际视频
 - DOMAIN-SUFFIX,hayabusa.io,🌎国际视频
+
+  # > Amazon Prime Video
 - DOMAIN-SUFFIX,aiv-cdn.net,🌎国际视频
 - DOMAIN-SUFFIX,amazonaws.com,🌎国际视频
 - DOMAIN-SUFFIX,amazonvideo.com,🌎国际视频
 - DOMAIN-SUFFIX,llnwd.net,🌎国际视频
 - DOMAIN-SUFFIX,primevideo.com,🌎国际视频
+
+  # > Bahamut
 - DOMAIN-SUFFIX,bahamut.com.tw,🌎国际视频
 - DOMAIN-SUFFIX,gamer.com.tw,🌎国际视频
 - DOMAIN-SUFFIX,hinet.net,🌎国际视频
+
+  # > BBC
 - DOMAIN-KEYWORD,bbcfmt,🌎国际视频
 - DOMAIN-KEYWORD,co.uk,🌎国际视频
 - DOMAIN-KEYWORD,uk-live,🌎国际视频
@@ -110,9 +141,15 @@ rules:
 - DOMAIN-SUFFIX,bbc.com,🌎国际视频
 - DOMAIN-SUFFIX,bbci.co,🌎国际视频
 - DOMAIN-SUFFIX,bbci.co.uk,🌎国际视频
+
+  # > CHOCO TV
 - DOMAIN-SUFFIX,chocotv.com.tw,🌎国际视频
+
+  # > Epicgames
 - DOMAIN-KEYWORD,epicgames,🌎国际视频
 - DOMAIN-SUFFIX,helpshift.com,🌎国际视频
+
+  # > Fox+
 - DOMAIN-KEYWORD,foxplus,🌎国际视频
 - DOMAIN-SUFFIX,config.fox.com,🌎国际视频
 - DOMAIN-SUFFIX,emome.net,🌎国际视频
@@ -126,21 +163,33 @@ rules:
 - DOMAIN-SUFFIX,now.com,🌎国际视频
 - DOMAIN-SUFFIX,theplatform.com,🌎国际视频
 - DOMAIN-SUFFIX,urlload.net,🌎国际视频
+
+  # > HBO && HBO Go
 - DOMAIN-SUFFIX,execute-api.ap-southeast-1.amazonaws.com,🌎国际视频
 - DOMAIN-SUFFIX,hbo.com,🌎国际视频
 - DOMAIN-SUFFIX,hboasia.com,🌎国际视频
 - DOMAIN-SUFFIX,hbogo.com,🌎国际视频
 - DOMAIN-SUFFIX,hbogoasia.hk,🌎国际视频
+
+  # > Hulu
 - DOMAIN-SUFFIX,happyon.jp,🌎国际视频
 - DOMAIN-SUFFIX,hulu.com,🌎国际视频
 - DOMAIN-SUFFIX,huluim.com,🌎国际视频
 - DOMAIN-SUFFIX,hulustream.com,🌎国际视频
+
+  # > Imkan
 - DOMAIN-SUFFIX,imkan.tv,🌎国际视频
+
+  # > JOOX
 - DOMAIN-SUFFIX,joox.com,🌎国际视频
+
+  # > MytvSUPER
 - DOMAIN-KEYWORD,nowtv100,🌎国际视频
 - DOMAIN-KEYWORD,rthklive,🌎国际视频
 - DOMAIN-SUFFIX,mytvsuper.com,🌎国际视频
 - DOMAIN-SUFFIX,tvb.com,🌎国际视频
+
+  # > Netflix
 - DOMAIN-SUFFIX,netflix.com,🌎国际视频
 - DOMAIN-SUFFIX,netflix.net,🌎国际视频
 - DOMAIN-SUFFIX,nflxext.com,🌎国际视频
@@ -148,26 +197,42 @@ rules:
 - DOMAIN-SUFFIX,nflximg.net,🌎国际视频
 - DOMAIN-SUFFIX,nflxso.net,🌎国际视频
 - DOMAIN-SUFFIX,nflxvideo.net,🌎国际视频
+
+  # > Pandora
 - DOMAIN-SUFFIX,pandora.com,🌎国际视频
+
+  # > Sky GO
 - DOMAIN-SUFFIX,sky.com,🌎国际视频
 - DOMAIN-SUFFIX,skygo.co.nz,🌎国际视频
+
+  # > Spotify
 - DOMAIN-KEYWORD,spotify,🌎国际视频
 - DOMAIN-SUFFIX,scdn.co,🌎国际视频
 - DOMAIN-SUFFIX,spoti.fi,🌎国际视频
+
+  # > viuTV
 - DOMAIN-SUFFIX,viu.tv,🌎国际视频
+
+  # > Youtube
 - DOMAIN-KEYWORD,youtube,🌎国际视频
 - DOMAIN-SUFFIX,googlevideo.com,🌎国际视频
 - DOMAIN-SUFFIX,gvt2.com,🌎国际视频
 - DOMAIN-SUFFIX,youtu.be,🌎国际视频
+
+  # AcFun
 - DOMAIN-SUFFIX,acfun.cn,🇨🇳中国视频
 - DOMAIN-SUFFIX,acfun.com,🇨🇳中国视频
 - DOMAIN-SUFFIX,aixifan.com,🇨🇳中国视频
+
+  # 网易
 - DOMAIN-SUFFIX,163.com,🇨🇳中国视频
 - DOMAIN-SUFFIX,126.com,🇨🇳中国视频
 - DOMAIN-SUFFIX,127.net,🇨🇳中国视频
 - DOMAIN-SUFFIX,netease.com,🇨🇳中国视频
 - DOMAIN-SUFFIX,163yun.com,🇨🇳中国视频
 - DOMAIN-SUFFIX,126.net,🇨🇳中国视频
+
+  # 腾讯
 - DOMAIN-SUFFIX,qq.com,🇨🇳中国视频
 - DOMAIN-SUFFIX,soso.com,🇨🇳中国视频
 - DOMAIN-SUFFIX,qpic.cn,🇨🇳中国视频
@@ -175,36 +240,54 @@ rules:
 - DOMAIN-SUFFIX,weixin.com,🇨🇳中国视频
 - DOMAIN-SUFFIX,qlogo.cn,🇨🇳中国视频
 - IP-CIDR,203.205.192.0/18,🇨🇳中国视频
+
+  # Bilibili
 - DOMAIN-SUFFIX,hdslb.com,🇨🇳中国视频
 - DOMAIN-SUFFIX,bilibili.com,🇨🇳中国视频
 - DOMAIN-SUFFIX,geetest.com,🇨🇳中国视频
 - DOMAIN-SUFFIX,acgvideo.com,🇨🇳中国视频
 - DOMAIN-SUFFIX,bilivideo.com,🇨🇳中国视频
+
+  # 湖南TV
 - DOMAIN-SUFFIX,hitv.com,🇨🇳中国视频
 - DOMAIN-SUFFIX,hunantv.com,🇨🇳中国视频
 - DOMAIN-SUFFIX,mgtv.com,🇨🇳中国视频
+
+  # Migu
 - DOMAIN-SUFFIX,cmvideo.cn,🇨🇳中国视频
 - DOMAIN-SUFFIX,migu.cn,🇨🇳中国视频
 - DOMAIN-SUFFIX,miguvideo.com,🇨🇳中国视频
+
+  # 优酷
 - DOMAIN-SUFFIX,soku.com,🇨🇳中国视频
 - DOMAIN-SUFFIX,youku.com,🇨🇳中国视频
 - DOMAIN-SUFFIX,ykimg.com,🇨🇳中国视频
 - IP-CIDR,106.11.0.0/16,🇨🇳中国视频
+
+  # 爱奇艺
 - DOMAIN-SUFFIX,iqiyi.com,🇨🇳中国视频
 - DOMAIN-SUFFIX,iqiyipic.com,🇨🇳中国视频
 - DOMAIN-SUFFIX,qy.net,🇨🇳中国视频
 - IP-CIDR,101.227.0.0/16,🇨🇳中国视频
 - IP-CIDR,101.224.0.0/13,🇨🇳中国视频
 - IP-CIDR,119.176.0.0/12,🇨🇳中国视频
+
+  # 搜狐
 - DOMAIN-SUFFIX,sohu.com,🇨🇳中国视频
 - DOMAIN-SUFFIX,sohu.com.cn,🇨🇳中国视频
 - DOMAIN-SUFFIX,itc.cn,🇨🇳中国视频
 - DOMAIN-SUFFIX,v-56.com,🇨🇳中国视频
+
+  # Kugou, Kuwo
 - DOMAIN-SUFFIX,kugou.com,🇨🇳中国视频
 - DOMAIN-SUFFIX,kuwo.cn,🇨🇳中国视频
 - DOMAIN-SUFFIX,koowo.com,🇨🇳中国视频
+
+  # 国内二级域名
 - DOMAIN-SUFFIX,edu.cn,🇨🇳中国其他
 - DOMAIN-SUFFIX,gov.cn,🇨🇳中国其他
+
+  # 新浪
 - DOMAIN-SUFFIX,weibo.com,🇨🇳中国其他
 - DOMAIN-SUFFIX,sinajs.cn,🇨🇳中国其他
 - DOMAIN-SUFFIX,sina.com,🇨🇳中国其他
@@ -215,6 +298,8 @@ rules:
 - DOMAIN-SUFFIX,miaopai.com,🇨🇳中国其他
 - DOMAIN-SUFFIX,xiaoka.tv,🇨🇳中国其他
 - DOMAIN-SUFFIX,t.cn,🇨🇳中国其他
+
+  # 阿里
 - DOMAIN-SUFFIX,aliyun.com,🇨🇳中国其他
 - DOMAIN-SUFFIX,taobao.com,🇨🇳中国其他
 - DOMAIN-SUFFIX,alicdn.com,🇨🇳中国其他
@@ -226,19 +311,36 @@ rules:
 - DOMAIN-SUFFIX,hichina.com,🇨🇳中国其他
 - DOMAIN-SUFFIX,xiami.com,🇨🇳中国其他
 - DOMAIN-SUFFIX,xiami.net,🇨🇳中国其他
+
+  # 百度
 - DOMAIN-SUFFIX,baidu.com,🇨🇳中国其他
 - DOMAIN-SUFFIX,bdstatic.com,🇨🇳中国其他
 - DOMAIN-SUFFIX,bcebos.com,🇨🇳中国其他
 - DOMAIN-SUFFIX,baidupcs.com,🇨🇳中国其他
 - DOMAIN-SUFFIX,qianqian.com,🇨🇳中国其他
+
+  # 知乎
 - DOMAIN-SUFFIX,zhihu.com,🇨🇳中国其他
 - DOMAIN-SUFFIX,zhimg.com,🇨🇳中国其他
+
+  # 秀米
 - DOMAIN-SUFFIX,xiumi.us,🇨🇳中国其他
+
+  # 豆瓣
 - DOMAIN-SUFFIX,douban.com,🇨🇳中国其他
 - DOMAIN-SUFFIX,doubanio.com,🇨🇳中国其他
+
+  # 天眼查
 - DOMAIN-SUFFIX,tianyancha.com,🇨🇳中国其他
+
+  # IP地址测试
 - DOMAIN-SUFFIX,ip138.com,🇨🇳中国其他
+
+  # 中国IP
 - GEOIP,CN,🇨🇳中国GEOIP
+
+  # (DNS Cache Pollution Protection)
+  # > Google
 - DOMAIN-SUFFIX,appspot.com,🌎GFW黑名单
 - DOMAIN-SUFFIX,blogger.com,🌎GFW黑名单
 - DOMAIN-SUFFIX,getoutline.org,🌎GFW黑名单
@@ -248,6 +350,7 @@ rules:
 - DOMAIN-SUFFIX,xn--ngstr-lra8j.com,🌎GFW黑名单
 - DOMAIN-KEYWORD,google,🌎GFW黑名单
 - DOMAIN-KEYWORD,blogspot,🌎GFW黑名单
+  # > Facebook
 - DOMAIN-SUFFIX,cdninstagram.com,🌎GFW黑名单
 - DOMAIN-SUFFIX,fb.com,🌎GFW黑名单
 - DOMAIN-SUFFIX,fb.me,🌎GFW黑名单
@@ -264,6 +367,7 @@ rules:
 - DOMAIN-SUFFIX,whatsapp.com,🌎GFW黑名单
 - DOMAIN-SUFFIX,whatsapp.net,🌎GFW黑名单
 - DOMAIN-KEYWORD,facebook,🌎GFW黑名单
+  # > Twitter
 - DOMAIN-SUFFIX,pscp.tv,🌎GFW黑名单
 - DOMAIN-SUFFIX,periscope.tv,🌎GFW黑名单
 - DOMAIN-SUFFIX,t.co,🌎GFW黑名单
@@ -272,15 +376,18 @@ rules:
 - DOMAIN-SUFFIX,twitpic.com,🌎GFW黑名单
 - DOMAIN-SUFFIX,vine.co,🌎GFW黑名单
 - DOMAIN-KEYWORD,twitter,🌎GFW黑名单
+  # > Telegram
 - DOMAIN-SUFFIX,t.me,🌎GFW黑名单
 - DOMAIN-SUFFIX,tdesktop.com,🌎GFW黑名单
 - DOMAIN-SUFFIX,telegra.ph,🌎GFW黑名单
 - DOMAIN-SUFFIX,telegram.me,🌎GFW黑名单
 - DOMAIN-SUFFIX,telegram.org,🌎GFW黑名单
+  # > Line
 - DOMAIN-SUFFIX,line.me,🌎GFW黑名单
 - DOMAIN-SUFFIX,line-apps.com,🌎GFW黑名单
 - DOMAIN-SUFFIX,line-scdn.net,🌎GFW黑名单
 - DOMAIN-SUFFIX,naver.jp,🌎GFW黑名单
+  # > Other
 - DOMAIN-SUFFIX,4shared.com,🌎GFW黑名单
 - DOMAIN-SUFFIX,881903.com,🌎GFW黑名单
 - DOMAIN-SUFFIX,abc.net.au,🌎GFW黑名单
@@ -483,6 +590,8 @@ rules:
 - DOMAIN-KEYWORD,pinterest,🌎GFW黑名单
 - DOMAIN-KEYWORD,porn,🌎GFW黑名单
 - DOMAIN-KEYWORD,wikileaks,🌎GFW黑名单
+
+  # (Region-Restricted Access Denied)
 - DOMAIN-SUFFIX,apartmentratings.com,🌎GFW黑名单
 - DOMAIN-SUFFIX,apartments.com,🌎GFW黑名单
 - DOMAIN-SUFFIX,bankmobilevibe.com,🌎GFW黑名单
@@ -529,13 +638,25 @@ rules:
 - DOMAIN,abc.go.com,🌎GFW黑名单
 - DOMAIN,abc.net.au,🌎GFW黑名单
 - DOMAIN,wego.here.com,🌎GFW黑名单
+  #USER-AGENT,Roam*,🌎GFW黑名单
+
+  # (The Most Popular Sites)
+  # > Apple
+  # > Apple URL Shortener
 - DOMAIN-SUFFIX,appsto.re,🌎GFW黑名单
+  # > TestFlight
 - DOMAIN,beta.itunes.apple.com,🌎GFW黑名单
+  # > iBooks Store download
 - DOMAIN,books.itunes.apple.com,🌎GFW黑名单
+  # > iTunes Store Moveis Trailers
 - DOMAIN,hls.itunes.apple.com,🌎GFW黑名单
+  # App Store Preview
 - DOMAIN,itunes.apple.com,🌎GFW黑名单
+  # > Spotlight
 - DOMAIN,api-glb-sea.smoot.apple.com,🌎GFW黑名单
+  # > Dictionary
 - DOMAIN,lookup-api.apple.com,🌎GFW黑名单
+  # > Google
 - DOMAIN-SUFFIX,abc.xyz,🌎GFW黑名单
 - DOMAIN-SUFFIX,android.com,🌎GFW黑名单
 - DOMAIN-SUFFIX,androidify.com,🌎GFW黑名单
@@ -580,8 +701,10 @@ rules:
 - DOMAIN-SUFFIX,youtu.be,🌎GFW黑名单
 - DOMAIN-SUFFIX,yt.be,🌎GFW黑名单
 - DOMAIN-SUFFIX,ytimg.com,🌎GFW黑名单
+  # > Steam
 - DOMAIN,media.steampowered.com,🌎GFW黑名单
 - DOMAIN,store.steampowered.com,🌎GFW黑名单
+  # > Other
 - DOMAIN-SUFFIX,0rz.tw,🌎GFW黑名单
 - DOMAIN-SUFFIX,4bluestones.biz,🌎GFW黑名单
 - DOMAIN-SUFFIX,9bis.net,🌎GFW黑名单
@@ -635,8 +758,11 @@ rules:
 - DOMAIN-SUFFIX,wolframalpha.com,🌎GFW黑名单
 - DOMAIN-SUFFIX,x-art.com,🌎GFW黑名单
 - DOMAIN-SUFFIX,yimg.com,🌎GFW黑名单
+
 - DOMAIN-KEYWORD,dlercloud,🌎GFW黑名单
 - DOMAIN-SUFFIX,dler.cloud,🌎GFW黑名单
+
+  # > Telegram
 - IP-CIDR,67.198.55.0/24,🌎GFW黑名单
 - IP-CIDR,91.108.4.0/22,🌎GFW黑名单
 - IP-CIDR,91.108.8.0/22,🌎GFW黑名单
@@ -646,6 +772,9 @@ rules:
 - IP-CIDR,109.239.140.0/24,🌎GFW黑名单
 - IP-CIDR,149.154.160.0/20,🌎GFW黑名单
 - IP-CIDR,205.172.60.0/22,🌎GFW黑名单
+
+  # (Extra IP-CIRD)
+  # > Google
 - IP-CIDR,35.190.247.0/24,🌎GFW黑名单
 - IP-CIDR,64.233.160.0/19,🌎GFW黑名单
 - IP-CIDR,66.102.0.0/20,🌎GFW黑名单
@@ -658,6 +787,7 @@ rules:
 - IP-CIDR,209.85.128.0/17,🌎GFW黑名单
 - IP-CIDR,216.58.192.0/19,🌎GFW黑名单
 - IP-CIDR,216.239.32.0/19,🌎GFW黑名单
+  # > Facebook
 - IP-CIDR,31.13.24.0/21,🌎GFW黑名单
 - IP-CIDR,31.13.64.0/18,🌎GFW黑名单
 - IP-CIDR,45.64.40.0/22,🌎GFW黑名单
@@ -673,6 +803,7 @@ rules:
 - IP-CIDR,179.60.192.0/22,🌎GFW黑名单
 - IP-CIDR,185.60.216.0/22,🌎GFW黑名单
 - IP-CIDR,204.15.20.0/22,🌎GFW黑名单
+  # > Twitter
 - IP-CIDR,69.195.160.0/19,🌎GFW黑名单
 - IP-CIDR,104.244.42.0/21,🌎GFW黑名单
 - IP-CIDR,192.133.76.0/22,🌎GFW黑名单
@@ -681,13 +812,19 @@ rules:
 - IP-CIDR,199.96.56.0/21,🌎GFW黑名单
 - IP-CIDR,202.160.128.0/22,🌎GFW黑名单
 - IP-CIDR,209.237.192.0/19,🌎GFW黑名单
+
+  # BT
 - DOMAIN-KEYWORD,announce,🌐BT元信息
 - DOMAIN-KEYWORD,torrent,🌐BT元信息
 - DOMAIN-KEYWORD,tracker,🌐BT元信息
+
+  # Local Area Network
 - DOMAIN-SUFFIX,local,🌐LAN
 - IP-CIDR,192.168.0.0/16,🌐LAN
 - IP-CIDR,10.0.0.0/8,🌐LAN
 - IP-CIDR,172.16.0.0/12,🌐LAN
 - IP-CIDR,127.0.0.0/8,🌐LAN
 - IP-CIDR,100.64.0.0/10,🌐LAN
+
+  # 其他流量
 - MATCH,🌐所有其他
