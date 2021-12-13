@@ -3,7 +3,6 @@
     "server_port":14783,
     "password":"8c80d838-253c-41df-afda-d0f04a2c0873",
     "timeout":300,
-    "user":"nobody",
     "method":"chacha20-ietf-poly1305",
     "fast_open":false,
     "nameserver":"1.0.0.1",
