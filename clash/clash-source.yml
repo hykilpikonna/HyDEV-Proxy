@@ -55,7 +55,7 @@ proxies:
 
 - name: "🇱🇺 HyDEV Luxembourg"
   type: ss
-  server: 92.38.163.122
+  server: lux.hydev.org
   port: 14783
   password: 8c80d838-253c-41df-afda-d0f04a2c0873
   alterId: 0
