@@ -26,6 +26,15 @@ proxies:
   cipher: chacha20-ietf-poly1305
   udp: true
 
+- name: 🇺🇸 New Jersey Vultr
+  type: ss
+  server: ovh.hydev.org
+  port: 14783
+  password: 8c80d838-253c-41df-afda-d0f04a2c0873
+  alterId: 0
+  cipher: chacha20-ietf-poly1305
+  udp: true
+
 - name: 🇨🇦 UofTCTF Quebec
   type: vmess
   server: uoftctf.hydev.org
@@ -77,6 +86,7 @@ proxy-groups:
   proxies: &id001
   - DIRECT
   - 🇨🇦 Canada OVH
+  - 🇺🇸 New Jersey Vultr
   - 🇨🇦 UofTCTF Quebec
   - 🇯🇵 HyDEV Tokyo Vultr
   - 🇯🇵 HyDEV Tokyo Vultr SS
