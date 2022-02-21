@@ -37,7 +37,7 @@ proxies:
 
 - name: 🇯🇵 HyDEV Tokyo Vultr
   type: vmess
-  server: nix.hydev.org
+  server: jp.hydev.org
   port: 8080
   uuid: 024eb2e3-65e8-4b30-bb24-f1ff6501fc8e
   alterId: 0
@@ -46,7 +46,7 @@ proxies:
 
 - name: 🇯🇵 HyDEV Tokyo Vultr SS
   type: ss
-  server: nix.hydev.org
+  server: jp.hydev.org
   port: 14783
   password: 8c80d838-253c-41df-afda-d0f04a2c0873
   alterId: 0
