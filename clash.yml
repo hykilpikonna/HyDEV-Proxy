@@ -28,7 +28,7 @@ proxies:
 
 - name: 🇺🇸 New Jersey Vultr
   type: ss
-  server: ovh.hydev.org
+  server: nj.hydev.org
   port: 14783
   password: 8c80d838-253c-41df-afda-d0f04a2c0873
   alterId: 0
