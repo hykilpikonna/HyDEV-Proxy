@@ -26,6 +26,33 @@ proxies:
   cipher: chacha20-ietf-poly1305
   udp: true
   
+- name: "🇨🇦 Canada OVH 2"
+  type: ss
+  server: ovh2.hydev.org
+  port: 14783
+  password: 8c80d838-253c-41df-afda-d0f04a2c0873
+  alterId: 0
+  cipher: chacha20-ietf-poly1305
+  udp: true
+  
+- name: "🇨🇦 Canada OVH T1"
+  type: ss
+  server: 158.69.185.230
+  port: 14783
+  password: 8c80d838-253c-41df-afda-d0f04a2c0873
+  alterId: 0
+  cipher: chacha20-ietf-poly1305
+  udp: true
+  
+- name: "🇨🇦 Canada OVH T2"
+  type: ss
+  server: 167.114.194.138
+  port: 14783
+  password: 8c80d838-253c-41df-afda-d0f04a2c0873
+  alterId: 0
+  cipher: chacha20-ietf-poly1305
+  udp: true
+  
 - name: "🇺🇸 New Jersey Vultr"
   type: ss
   server: nj.hydev.org
